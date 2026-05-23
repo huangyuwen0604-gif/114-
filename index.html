@@ -6,6 +6,7 @@
 <title>數一數二語眾不同 🌿 114學年度勝利國中資優班成果發表會</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
   :root {
     --mint:      #5bbfa8;
@@ -413,6 +414,29 @@
     white-space: nowrap;
   }
   .comment-form button:hover { background: var(--mint-dark); transform: scale(1.05); }
+
+  /* Export panel */
+  .export-panel {
+    margin-top: 28px; padding: 18px 20px;
+    background: #fff; border-radius: 18px;
+    border: 2px dashed #b8ddd0;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .export-panel label { font-size: 0.85rem; font-weight: 700; color: var(--text-mid); white-space: nowrap; }
+  .export-panel input {
+    border: 2px solid #b8ddd0; border-radius: 10px;
+    padding: 7px 12px; font-family: inherit; font-size: 0.88rem;
+    outline: none; width: 130px; transition: border-color .2s;
+  }
+  .export-panel input:focus { border-color: var(--mint); }
+  .export-btn {
+    padding: 9px 20px; border-radius: 999px; border: none;
+    background: var(--orange); color: #fff;
+    font-size: 0.88rem; font-weight: 700; cursor: pointer; font-family: inherit;
+    transition: background .2s, transform .2s; white-space: nowrap;
+  }
+  .export-btn:hover { background: #c07820; transform: scale(1.04); }
+  .export-hint { font-size: 0.75rem; color: var(--text-lt); width: 100%; }
   .comments-list { display: flex; flex-direction: column; gap: 12px; }
   .comment-item {
     background: #fff; border-radius: 16px;
@@ -780,6 +804,14 @@
     <textarea id="commentText" placeholder="寫下你的感言、鼓勵或問題 💬" maxlength="200"></textarea>
     <button onclick="addComment()">送出 🚀</button>
   </div>
+  <!-- Export panel -->
+  <div class="export-panel">
+    <label>🔒 管理員匯出：</label>
+    <input type="password" id="exportPwd" placeholder="輸入密碼" onkeydown="if(event.key==='Enter')exportComments()">
+    <button class="export-btn" onclick="exportComments()">📥 匯出 Excel</button>
+    <span class="export-hint">輸入管理員密碼後，即可將所有留言匯出為 .xlsx 檔案</span>
+  </div>
+
   <div class="comments-list" id="commentsList">
     <div class="comment-item">
       <div class="comment-name">🌿 主辦單位</div>
@@ -1021,6 +1053,83 @@ function addComment() {
 function escHtml(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+/* ── EXPORT COMMENTS TO XLSX ── */
+const EXPORT_PWD = '成發2025'; // ← 可自行修改密碼
+
+function exportComments() {
+  const pwd = document.getElementById('exportPwd').value;
+  if (pwd !== EXPORT_PWD) {
+    alert('❌ 密碼錯誤，請重新輸入');
+    return;
+  }
+
+  const allComments = [
+    { name:'主辦單位', text:'歡迎大家來到 114 學年度資優班成果發表會！感謝所有同學的努力與老師們的指導。數一數二，語眾不同！🌱', time:'6/2 13:00' },
+    ...comments
+  ];
+
+  if (allComments.length === 0) {
+    alert('目前還沒有留言可匯出');
+    return;
+  }
+
+  // Build worksheet data
+  const wsData = [
+    ['序號', '姓名', '留言內容', '留言時間'],
+    ...allComments.map((c, i) => [i + 1, c.name, c.text, c.time])
+  ];
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+  // Column widths
+  ws['!cols'] = [
+    { wch: 6 },   // 序號
+    { wch: 14 },  // 姓名
+    { wch: 60 },  // 留言內容
+    { wch: 16 },  // 時間
+  ];
+
+  // Header row style (basic)
+  const headerCells = ['A1','B1','C1','D1'];
+  headerCells.forEach(addr => {
+    if (ws[addr]) {
+      ws[addr].s = {
+        font: { bold: true, color: { rgb: 'FFFFFF' } },
+        fill: { fgColor: { rgb: '3A8A76' } },
+        alignment: { horizontal: 'center' }
+      };
+    }
+  });
+
+  XLSX.utils.book_append_sheet(wb, ws, '留言板');
+
+  // Add vote summary sheet
+  const totalVotes = Object.values(votes).reduce((a,b)=>a+b,0) || 0;
+  const voteData = [
+    ['研究組別', '主題', '科別', '票數', '得票率'],
+    ...groups.map((g, i) => [
+      `研究 ${g.num}`,
+      g.title,
+      g.subject,
+      votes[i] || 0,
+      totalVotes ? `${Math.round((votes[i]||0)/totalVotes*100)}%` : '0%'
+    ])
+  ];
+  const wsVote = XLSX.utils.aoa_to_sheet(voteData);
+  wsVote['!cols'] = [{ wch:10 },{ wch:22 },{ wch:10 },{ wch:8 },{ wch:8 }];
+  XLSX.utils.book_append_sheet(wb, wsVote, '人氣投票結果');
+
+  // Download
+  const now = new Date();
+  const dateStr = `${now.getMonth()+1}${String(now.getDate()).padStart(2,'0')}`;
+  XLSX.writeFile(wb, `成發留言板_${dateStr}.xlsx`);
+
+  document.getElementById('exportPwd').value = '';
+  alert(`✅ 已匯出 ${allComments.length} 則留言 + 投票結果！`);
+}
+
 renderComments();
 
 /* ── STATION DATA ── */
