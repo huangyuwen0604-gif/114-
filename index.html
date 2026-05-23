@@ -249,15 +249,26 @@
     width: 100%; height: 100%; object-fit: cover;
     display: block; position: absolute; inset: 0;
     transition: transform .3s ease;
+    border-radius: 20px 20px 0 0;
   }
   .card:hover .card-thumb { transform: scale(1.06); }
   .card-thumb-overlay {
     position: absolute; inset: 0;
-    background: rgba(45,58,48,.18);
+    background: rgba(45,58,48,.22);
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.6rem; opacity: 0; transition: opacity .2s;
+    font-size: 1.8rem; opacity: 0; transition: opacity .2s;
+    border-radius: 20px 20px 0 0;
   }
   .card:hover .card-thumb-overlay { opacity: 1; }
+  /* Emoji fallback shown only when image fails */
+  .station-hdr { position: relative; }
+  .station-emoji-fb {
+    font-size: 2.8rem;
+    position: relative; z-index: 1;
+    pointer-events: none;
+  }
+  /* Hide emoji when image loads successfully */
+  .station-hdr img.card-thumb[src]:not([src=""]) ~ .station-emoji-fb { display: none; }
   .card-body { padding: 14px 16px 16px; }
   .card-num { font-size: 0.72rem; font-weight: 700; color: var(--mint-dark); letter-spacing: .08em; margin-bottom: 4px; }
   .card-title { font-size: 1.05rem; font-weight: 900; margin-bottom: 8px; line-height: 1.3; color: var(--text-dark); }
@@ -471,7 +482,7 @@
   <a href="#hero">🏠 首頁</a>
   <a href="#schedule">📋 流程</a>
   <a href="#presentations">🔬 發表</a>
-  <a href="#posters">🖼️ 海報</a>
+  <a href="#posters">🗺️ 關卡</a>
   <a href="#vote">⭐ 投票</a>
   <a href="#comments">💬 留言</a>
 </nav>
@@ -623,95 +634,123 @@
   </div>
 </section>
 
-<!-- ═══ 海報卡片 ═══ -->
+<!-- ═══ 關卡海報 ═══ -->
 <section id="posters" style="padding-top:10px;max-width:1000px">
-  <div class="section-tag">🖼️ 成果海報</div>
-  <h2 class="section-title">關卡海報瀏覽</h2>
-  <p style="font-size:.88rem;color:var(--text-lt);margin-bottom:24px;font-weight:600">點擊卡片可查看詳情 ✨</p>
+  <div class="section-tag">🗺️ 分組闖關</div>
+  <h2 class="section-title">關卡規則海報</h2>
+  <p style="font-size:.88rem;color:var(--text-lt);margin-bottom:24px;font-weight:600">13:50 ～ 14:40 分組闖關 ｜ 點擊卡片可放大查看完整規則 🔍</p>
 
-  <div class="cards-grid">
+  <div class="cards-grid" id="stationGrid">
 
-    <div class="card" onclick="openModal(0)">
-      <div class="card-header" style="background:linear-gradient(135deg,#c8ede5,#9ad8ca)">♟️</div>
+    <div class="card" onclick="openStationModal(0)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#c8ede5,#9ad8ca)">
+        <img class="card-thumb" src="station01.jpg" alt="職涯偵探" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">🕵️</span>
+      </div>
       <div class="card-body">
-        <div class="card-num">研究 01 ｜ 數學</div>
-        <div class="card-title">立體封殺棋</div>
-        <div class="card-subject">數學</div>
-        <div class="card-members">816陳奕翔 816王耀霆 817黃柏豪</div>
-        <div class="card-teacher">指導：謝筱莉 老師</div>
-        <div class="card-time">14:40 – 14:45</div>
+        <div class="card-num">關卡 01</div>
+        <div class="card-title">職涯偵探</div>
+        <div class="card-subject">語文 × 職業</div>
+        <div class="card-members">用英文單字猜職業，40秒內配對3組即過關</div>
       </div>
     </div>
 
-    <div class="card" onclick="openModal(1)">
-      <div class="card-header" style="background:linear-gradient(135deg,#d4f0d4,#a8e0a8)">🎈</div>
+    <div class="card" onclick="openStationModal(1)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#d4f0d4,#a8e0a8)">
+        <img class="card-thumb" src="station02.jpg" alt="加密檔案" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">📜</span>
+      </div>
       <div class="card-body">
-        <div class="card-num">研究 02 ｜ 生物</div>
-        <div class="card-title">漏氣車之氣球動力車初探</div>
-        <div class="card-subject" style="background:#d4f0d4;color:#2d6a2d">生物</div>
-        <div class="card-members">718吳舒昀 716邱貞穎 716陳悅宜</div>
-        <div class="card-teacher">指導：劉宛褘 老師</div>
-        <div class="card-time">14:45 – 14:50</div>
+        <div class="card-num">關卡 02</div>
+        <div class="card-title">三百六十行：加密檔案</div>
+        <div class="card-subject">語文 × 職業</div>
+        <div class="card-members">兩分鐘內將8首詩與職業卡牌配對，對5題即過關</div>
       </div>
     </div>
 
-    <div class="card" onclick="openModal(2)">
-      <div class="card-header" style="background:linear-gradient(135deg,#fdefd0,#f5d48a)">🎭</div>
+    <div class="card" onclick="openStationModal(2)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#fdefd0,#f5d48a)">
+        <img class="card-thumb" src="station03.jpg" alt="重組電路遊" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">⚡</span>
+      </div>
       <div class="card-body">
-        <div class="card-num">研究 03 ｜ 生活應用</div>
-        <div class="card-title">裝腔做樣</div>
-        <div class="card-subject" style="background:#fdefd0;color:#a06010">生活應用</div>
-        <div class="card-members">814黃子晏 814楊可杰 816葉正釩</div>
-        <div class="card-teacher">指導：林文津 老師</div>
-        <div class="card-time">14:50 – 14:55</div>
+        <div class="card-num">關卡 03</div>
+        <div class="card-title">重組電路遊</div>
+        <div class="card-subject">資訊 × 物理</div>
+        <div class="card-members">3分鐘內用有限材料把電路接通，一次最多兩人一組</div>
       </div>
     </div>
 
-    <div class="card" onclick="openModal(3)">
-      <div class="card-header" style="background:linear-gradient(135deg,#c8ede5,#b0ddd5)">🔮</div>
+    <div class="card" onclick="openStationModal(3)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#c8ede5,#9ad8ca)">
+        <img class="card-thumb" src="station04.jpg" alt="漏汽車進軍堡壘" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">🎈</span>
+      </div>
       <div class="card-body">
-        <div class="card-num">研究 04 ｜ 語文</div>
-        <div class="card-title">未來職能研究所</div>
-        <div class="card-subject">語文</div>
-        <div class="card-members">818譚芯 818翁嘉謙 819葉沛緹 819葳璃宜 705李采恩 705李婕語 706謝昕克</div>
-        <div class="card-teacher">指導：黃郁雯 王俐珍 老師</div>
-        <div class="card-time">14:55 – 15:05</div>
+        <div class="card-num">關卡 04</div>
+        <div class="card-title">漏汽車進軍堡壘</div>
+        <div class="card-subject">生物 × 物理</div>
+        <div class="card-members">控制氣球車出發角度，在距離內撞倒6個疊杯即過關</div>
       </div>
     </div>
 
-    <div class="card" onclick="openModal(4)">
-      <div class="card-header" style="background:linear-gradient(135deg,#d0e8e8,#a8cece)">🌊</div>
+    <div class="card" onclick="openStationModal(4)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#d0e8e8,#a8cece)">
+        <img class="card-thumb" src="station05.jpg" alt="水落下的聲音" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">🌊</span>
+      </div>
       <div class="card-body">
-        <div class="card-num">研究 05 ｜ 生活應用</div>
-        <div class="card-title">水的聲溫</div>
-        <div class="card-subject" style="background:#d0e8e8;color:#2d6868">生活應用</div>
-        <div class="card-members">814顏知宬 817余恩欣 817陳芊嘉</div>
-        <div class="card-teacher">指導：陳家揚 老師</div>
-        <div class="card-time">15:05 – 15:10</div>
+        <div class="card-num">關卡 05</div>
+        <div class="card-title">慢慢地聽～水落下的聲音</div>
+        <div class="card-subject">生活應用</div>
+        <div class="card-members">聆聽音檔，猜出水溫（10°C ～ 90°C）</div>
       </div>
     </div>
 
-    <div class="card" onclick="openModal(5)">
-      <div class="card-header" style="background:linear-gradient(135deg,#f0e4d0,#dcc8a8)">💡</div>
+    <div class="card" onclick="openStationModal(5)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#f0e4d0,#dcc8a8)">
+        <img class="card-thumb" src="station06.jpg" alt="拉力膜範生" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">💪</span>
+      </div>
       <div class="card-body">
-        <div class="card-num">研究 06 ｜ 資訊</div>
-        <div class="card-title">一線曙光</div>
-        <div class="card-subject" style="background:#f0e4d0;color:#7a5a30">資訊</div>
-        <div class="card-members">714陳品兆 719郭柏謙</div>
-        <div class="card-teacher">指導：張再業 老師</div>
-        <div class="card-time">15:10 – 15:15</div>
+        <div class="card-num">關卡 06</div>
+        <div class="card-title">AKA拉力膜範生</div>
+        <div class="card-subject">生活應用</div>
+        <div class="card-members">製作薄膜，用彈簧秤測出可承受100公克重的拉力即過關</div>
       </div>
     </div>
 
-    <div class="card" onclick="openModal(6)">
-      <div class="card-header" style="background:linear-gradient(135deg,#dce8d8,#b8d4b0)">⚡</div>
+    <div class="card" onclick="openStationModal(6)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#dce8d8,#b8d4b0)">
+        <img class="card-thumb" src="station07.jpg" alt="延萊如此" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">🧪</span>
+      </div>
       <div class="card-body">
-        <div class="card-num">研究 07 ｜ 物理</div>
+        <div class="card-num">關卡 07</div>
         <div class="card-title">延萊如此</div>
-        <div class="card-subject" style="background:#dce8d8;color:#3a6030">物理</div>
-        <div class="card-members">815郭妮娜 815蔡維昕</div>
-        <div class="card-teacher">指導：李智瑋 老師</div>
-        <div class="card-time">15:15 – 15:20</div>
+        <div class="card-subject">物理 × 化學</div>
+        <div class="card-members">挑選硼砂水濃度，加入膠水做出史萊姆，成品可帶走！</div>
+      </div>
+    </div>
+
+    <div class="card" onclick="openStationModal(7)" style="border:2px dashed var(--orange)">
+      <div class="card-header station-hdr" style="background:linear-gradient(135deg,#ffe4c8,#ffcf8a)">
+        <img class="card-thumb" src="station08.jpg" alt="隱藏關卡" onerror="this.style.display='none'">
+        <div class="card-thumb-overlay">🔍</div>
+        <span class="station-emoji-fb">🎲</span>
+      </div>
+      <div class="card-body">
+        <div class="card-num" style="color:var(--orange)">🔒 隱藏關卡</div>
+        <div class="card-title">???</div>
+        <div class="card-subject" style="background:#ffe4c8;color:#a05010">終極挑戰</div>
+        <div class="card-members">與勝利的老師們進行終極決鬥！！！</div>
       </div>
     </div>
 
@@ -984,25 +1023,68 @@ function escHtml(s) {
 }
 renderComments();
 
-/* ── AUTO-LOAD CARD THUMBNAILS ── */
-document.querySelectorAll('.card').forEach((card, i) => {
-  const header = card.querySelector('.card-header');
-  const posterSrc = `poster${String(i+1).padStart(2,'0')}.jpg`;
+/* ── STATION DATA ── */
+const stations = [
+  { emoji:'🕵️', title:'職涯偵探', sub:'語文 × 職業',
+    img:'station01.jpg', bg:'linear-gradient(135deg,#c8ede5,#9ad8ca)',
+    rules:'1. 共有10個職業及30張單字卡，每個職業有三個相關的英文單字\n2. 用英文單字猜出職業，並將職業相關的英文單字與其職業配對\n3. 四十秒內配對出三組正確的職業＆單字即挑戰成功' },
+  { emoji:'📜', title:'三百六十行：加密檔案', sub:'語文 × 職業',
+    img:'station02.jpg', bg:'linear-gradient(135deg,#d4f0d4,#a8e0a8)',
+    rules:'1. 每首詩是一個「冷門職業」的介紹\n2. 兩分鐘內將八首詩與相對應的職業卡牌進行配對\n3. 八題之中對五題即過關' },
+  { emoji:'⚡', title:'重組電路遊', sub:'資訊 × 物理',
+    img:'station03.jpg', bg:'linear-gradient(135deg,#fdefd0,#f5d48a)',
+    rules:'1. 3分鐘內把電路接通\n2. 不可破壞原本的物品\n3. 一次最多兩個人為一組\n4. 使用有限的材料完成' },
+  { emoji:'🎈', title:'漏汽車進軍堡壘', sub:'生物 × 物理',
+    img:'station04.jpg', bg:'linear-gradient(135deg,#c8ede5,#9ad8ca)',
+    rules:'使用打氣筒在氣球車內充氣，控制氣球車出發角度，放手使它撞倒疊杯\n\n【基礎版】80cm的距離內撞倒6個疊杯\n【進階版】120cm的距離內撞倒6個疊杯' },
+  { emoji:'🌊', title:'慢慢地聽～水落下的聲音', sub:'生活應用',
+    img:'station05.jpg', bg:'linear-gradient(135deg,#d0e8e8,#a8cece)',
+    rules:'1. 隨機從27個音檔中播出兩個（10度～90度，每10度有3個音檔）\n2. 每一個音檔會播15秒\n3. 需聽音檔猜出水溫，水溫範圍從10度到90度' },
+  { emoji:'💪', title:'AKA拉力膜範生', sub:'生活應用',
+    img:'station06.jpg', bg:'linear-gradient(135deg,#f0e4d0,#dcc8a8)',
+    rules:'1. 製作出薄膜\n2. 製作出的薄膜，用彈簧秤測出可承受的拉力\n3. 達到100公克重時即過關' },
+  { emoji:'🧪', title:'延萊如此', sub:'物理 × 化學',
+    img:'station07.jpg', bg:'linear-gradient(135deg,#dce8d8,#b8d4b0)',
+    rules:'1. 挑選喜歡的硼砂水濃度\n2. 加入膠水自己試著做出史萊姆\n3. 如果成功做出完整史萊姆，挑戰成功\n4. 做完成品可帶回' },
+  { emoji:'🎲', title:'隱藏關卡', sub:'終極挑戰',
+    img:'station08.jpg', bg:'linear-gradient(135deg,#ffe4c8,#ffcf8a)',
+    rules:'歡迎來到隱藏關卡！\n\n與勝利的老師們進行終極決鬥！！！\n\n（能找到這個關卡的你，已經很厲害了 👏）' },
+];
+
+/* ── STATION MODAL ── */
+function openStationModal(i) {
+  const s = stations[i];
+  const img = document.getElementById('modalPosterImg');
+  const fallback = document.getElementById('modalPosterFallback');
+  const wrap = document.getElementById('modalPosterWrap');
+  const fsBtn = document.getElementById('fullscreenBtn');
+
+  wrap.style.background = s.bg;
+  fallback.textContent = s.emoji;
+  fallback.style.display = 'flex';
+  img.style.display = 'none';
+  fsBtn.style.display = 'none';
+  currentPosterSrc = '';
+
   const t = new Image();
   t.onload = () => {
-    const thumb = document.createElement('img');
-    thumb.className = 'card-thumb';
-    thumb.src = posterSrc;
-    thumb.alt = '海報縮圖';
-    const ov = document.createElement('div');
-    ov.className = 'card-thumb-overlay';
-    ov.textContent = '🔍';
-    header.innerHTML = '';
-    header.appendChild(thumb);
-    header.appendChild(ov);
+    img.src = s.img; img.style.display = 'block';
+    fallback.style.display = 'none';
+    fsBtn.style.display = 'block';
+    currentPosterSrc = s.img;
   };
-  t.src = posterSrc;
-});
+  t.onerror = () => { img.style.display = 'none'; fallback.style.display = 'flex'; };
+  t.src = s.img;
+
+  document.getElementById('modalTitle').textContent = s.title;
+  document.getElementById('modalInfoRow').innerHTML =
+    `<span class="info-chip">🗺️ 關卡 ${String(i+1).padStart(2,'0')}</span>
+     <span class="info-chip">${s.sub}</span>`;
+  document.getElementById('modalDesc').innerHTML =
+    `<strong style="display:block;margin-bottom:10px;color:var(--text-mid)">📋 關卡規則：</strong>` +
+    s.rules.replace(/\n/g,'<br>');
+  document.getElementById('modalOverlay').classList.add('open');
+}
 
 /* ── LEAF PARTICLES ── */
 const canvas = document.getElementById('particles');
