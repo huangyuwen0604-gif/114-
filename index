@@ -531,14 +531,14 @@
         <tr>
           <td><b>14:55–15:05</b></td>
           <td>🔮 未來職能研究所</td>
-          <td>818譚芯 818翁嘉謙 819葉沛緹<br>819葳璃宜 705李采恩 705李婕語 706謝昕克</td>
+          <td>818譚芯 818翁嘉謙 819葉沛緹<br>819葳璃宜 705李采恩 705李婕語 706謝昕霓</td>
           <td>黃郁雯 王俐珍</td>
           <td><span class="subject-tag" style="background:#a855f7">語文</span></td>
         </tr>
         <tr>
           <td><b>15:05–15:10</b></td>
           <td>🌊 水的聲溫</td>
-          <td>814顏知宬 817余恩欣 817陳芊嘉</td>
+          <td>814顏知寬 817余恩欣 817陳芊嘉</td>
           <td>陳家揚</td>
           <td><span class="subject-tag" style="background:#06b6d4">生活應用</span></td>
         </tr>
@@ -546,7 +546,7 @@
           <td><b>15:10–15:15</b></td>
           <td>💡 一線曙光</td>
           <td>714陳品兆 719郭柏謙</td>
-          <td>張再業</td>
+          <td>張禹業</td>
           <td><span class="subject-tag" style="background:#eab308">資訊</span></td>
         </tr>
         <tr>
@@ -590,7 +590,7 @@
         <div class="card-title">漏氣車之氣球動力車初探</div>
         <div class="card-subject" style="background:#dcfce7;color:#15803d">生物</div>
         <div class="card-members">718吳舒昀 716邱貞穎 716陳悅宜</div>
-        <div class="card-teacher">指導：劉宛褘 老師</div>
+        <div class="card-teacher">指導：劉宛甄 老師</div>
         <div class="card-time" style="color:#15803d;background:#f0fdf4">14:45 – 14:50</div>
       </div>
     </div>
@@ -615,7 +615,7 @@
         <div class="card-num">研究 04 ｜ 語文</div>
         <div class="card-title">未來職能研究所</div>
         <div class="card-subject" style="background:#f5f3ff;color:#7c3aed">語文</div>
-        <div class="card-members">818譚芯 818翁嘉謙 819葉沛緹 819葳璃宜 705李采恩 705李婕語 706謝昕克</div>
+        <div class="card-members">818譚芯 818翁嘉謙 819葉沛緹 819葳璃宜 705李采恩 705李婕語 706謝昕霓</div>
         <div class="card-teacher">指導：黃郁雯 王俐珍 老師</div>
         <div class="card-time" style="color:#7c3aed;background:#faf5ff">14:55 – 15:05</div>
       </div>
@@ -628,7 +628,7 @@
         <div class="card-num">研究 05 ｜ 生活應用</div>
         <div class="card-title">水的聲溫</div>
         <div class="card-subject" style="background:#cffafe;color:#0e7490">生活應用</div>
-        <div class="card-members">814顏知宬 817余恩欣 817陳芊嘉</div>
+        <div class="card-members">814顏知寬 817余恩欣 817陳芊嘉</div>
         <div class="card-teacher">指導：陳家揚 老師</div>
         <div class="card-time" style="color:#0e7490;background:#ecfeff">15:05 – 15:10</div>
       </div>
@@ -642,7 +642,7 @@
         <div class="card-title">一線曙光</div>
         <div class="card-subject" style="background:#fef9c3;color:#a16207">資訊</div>
         <div class="card-members">714陳品兆 719郭柏謙</div>
-        <div class="card-teacher">指導：張再業 老師</div>
+        <div class="card-teacher">指導：張禹業 老師</div>
         <div class="card-time" style="color:#a16207;background:#fefce8">15:10 – 15:15</div>
       </div>
     </div>
@@ -692,7 +692,7 @@
     <!-- seed comments -->
     <div class="comment-item">
       <div class="comment-name">🌟 主辦單位</div>
-      <div class="comment-text">歡迎大家來到 114 學年度資優班成果發表會！感謝所有同學的努力與老師們的指導。數一數二，語眾不同！✨</div>
+      <div class="comment-text">歡迎大家來到 114 學年度生力國中資優班成果發表會！感謝所有同學的努力與老師們的指導。數一數二，語眾不同！✨</div>
       <div class="comment-time">今天 13:00</div>
     </div>
   </div>
@@ -742,18 +742,18 @@ const groups = [
     desc:'研究人們在不同情境下的肢體語言與聲音腔調，探討「腔調」對溝通效果的影響。透過錄影觀察、問卷調查，分析裝腔作勢是否真的有助溝通說服。' },
   { emoji:'🔮', color:'#a855f7', bg:'linear-gradient(135deg,#f5f3ff,#c4b5fd)',
     num:'04', subject:'語文', time:'14:55–15:05', title:'未來職能研究所',
-    members:'818譚芯、818翁嘉謙、819葉沛緹、819葳璃宜、705李采恩、705李婕語、706謝昕克',
+    members:'818譚芯、818翁嘉謙、819葉沛緹、819葳璃宜、705李采恩、705李婕語、706謝昕霓',
     teacher:'黃郁雯 老師 ／ 王俐珍 老師',
     desc:'以文獻分析與問卷調查，探索未來社會最需要的職業核心能力。訪談在地職人，整合 AI 時代趨勢，提出適合青少年發展的語文與溝通職能培養建議。' },
   { emoji:'🌊', color:'#06b6d4', bg:'linear-gradient(135deg,#cffafe,#67e8f9)',
     num:'05', subject:'生活應用', time:'15:05–15:10', title:'水的聲溫',
-    members:'814顏知宬、817余恩欣、817陳芊嘉',
+    members:'814顏知寬、817余恩欣、817陳芊嘉',
     teacher:'陳家揚 老師',
     desc:'探討水溫變化對聲音傳導速度的影響，以不同溫度的水作為聲波介質，搭配麥克風與頻譜分析軟體，測量聲速差異，分析溫度與聲學特性的關係。' },
   { emoji:'💡', color:'#eab308', bg:'linear-gradient(135deg,#fef9c3,#fde047)',
     num:'06', subject:'資訊', time:'15:10–15:15', title:'一線曙光',
     members:'714陳品兆、719郭柏謙',
-    teacher:'張再業 老師',
+    teacher:'張禹業 老師',
     desc:'以程式設計與資料視覺化為工具，探討某議題的數據趨勢，從龐大資料中找到「一線曙光」──細微但關鍵的正面訊號，培養以數據看世界的能力。' },
   { emoji:'⚡', color:'#ef4444', bg:'linear-gradient(135deg,#fee2e2,#fca5a5)',
     num:'07', subject:'物理', time:'15:15–15:20', title:'延萊如此',
